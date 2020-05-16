@@ -1,3 +1,5 @@
+The original KG-A2C repository has been forked from u/rajammanabrolu
+
 # KG-A2C
 Goal driven language generation using knowledge graph A2C agents. This code accompanies the paper [Graph Constrained Reinforcement Learning for Natural Language Action Spaces](https://openreview.net/forum?id=B1x6w0EtwH).
 
