@@ -1,2 +1,54 @@
 Logging to ./logs/
 Parameters {'output_dir': './logs/', 'spm_file': './spm_models/unigram_8k.model', 'tsv_file': '../data/zork1_entity2id.tsv', 'rom_file_path': 'roms/zork1.z5', 'openie_path': 'stanford-corenlp-full-2018-10-05', 'batch_size': 16, 'lr': 0.003, 'gamma': 0.5, 'embedding_size': 50, 'hidden_size': 100, 'padding_idx': 0, 'gat_emb_size': 50, 'dropout_ratio': 0.2, 'preload_weights': '', 'bindings': 'zork1', 'seed': 0, 'steps': 100000, 'reset_steps': 100, 'stuck_steps': 10, 'trial': 'base', 'loss': 'value_policy_entropy', 'graph_dropout': 0.0, 'k_object': 1, 'g_val': False, 'entropy_coeff': 0.03, 'clip': 40, 'bptt': 8, 'value_coeff': 9, 'template_coeff': 3, 'object_coeff': 9, 'recurrent': True, 'checkpoint_interval': 500, 'gat': True, 'masking': 'kg'}
+TmplPred: spray OBJ with OBJ 0.005, throw OBJ at OBJ 0.005, zork 0.005, exit OBJ 0.005, burn down OBJ with OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, skelet 0.002, bar 0.002, under 0.002 GT: mailbo
+Act: stay, Rew 0, Score 0, Done False, Value 0.047
+Obs: You will be lost without me!
+TmplPred: spray OBJ with OBJ 0.005, break down OBJ with OBJ 0.005, throw OBJ at OBJ 0.005, push OBJ 0.005, exit OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, mail 0.002, skelet 0.002, under 0.002 GT: mailbo
+Act: pray, Rew 0, Score 0, Done False, Value 0.036
+Obs: If you pray enough, your prayers may be answered.
+TmplPred: spray OBJ with OBJ 0.005, break down OBJ with OBJ 0.005, throw OBJ at OBJ 0.005, go around OBJ 0.005, zork 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, mail 0.002, bar 0.002, under 0.002 GT: mailbo
+Act: invent, Rew 0, Score 0, Done False, Value 0.030
+Obs: You are empty handed.
+TmplPred: spray OBJ with OBJ 0.005, go around OBJ 0.005, froboz 0.005, hatch OBJ 0.005, throw OBJ at OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, mail 0.002, bar 0.002, skelet 0.002 GT: mailbo
+Act: throw front west, Rew 0, Score 0, Done False, Value 0.033
+Obs: What do you want to throw the front west at?
+TmplPred: go around OBJ 0.005, spray OBJ with OBJ 0.005, touch OBJ 0.005, say 0.005, throw OBJ at OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, skelet 0.002, bar 0.002, under 0.002 GT: mailbo
+Act: clean front with front, Rew 0, Score 0, Done False, Value 0.059
+Obs: If you wish, but heaven only knows why.
+TmplPred: throw OBJ at OBJ 0.005, light OBJ 0.005, zork 0.005, say 0.005, spray OBJ with OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, mail 0.002, bar 0.002, skelet 0.002 GT: mailbo
+Act: wind up all, Rew 0, Score 0, Done False, Value 0.045
+Obs: You can't use multiple direct objects with "wind".
+TmplPred: turn OBJ to OBJ 0.005, spray OBJ with OBJ 0.005, touch OBJ 0.005, pull OBJ 0.005, read from OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, mail 0.002, bar 0.002, skelet 0.002 GT: mailbo
+Act: open boarde, Rew 0, Score 0, Done False, Value 0.022
+Obs: The door cannot be opened.
+TmplPred: spray OBJ with OBJ 0.005, light OBJ 0.005, throw OBJ at OBJ 0.005, exit OBJ 0.005, go around OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: lubric 0.002, stream 0.002, bar 0.002, mail 0.002, quit 0.002 GT: mailbo
+Act: swing of, Rew 0, Score 0, Done False, Value 0.035
+Obs: What do you want to swing?
+Returns:  0.000, 0.000, 0.000, 0.001, 0.001, 0.002, 0.004, 0.009
+Advants:  -0.047, -0.036, -0.030, -0.032, -0.058, -0.043, -0.018, -0.026
+TmplPred: south 0.006, west 0.006, hatch OBJ 0.005, north 0.005, climb 0.005 GT: open OBJ, north, south, west
+ObjtPred: mailbo 0.002, up 0.002, lubric 0.002, bar 0.002, under 0.002 GT: mailbo
+Act: take all, Rew 0, Score 0, Done False, Value -0.186
+Obs: small mailbox: It is securely anchored.
+TmplPred: south 0.006, climb 0.006, west 0.005, north 0.005, exit OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: mailbo 0.002, up 0.002, lubric 0.002, bar 0.002, under 0.002 GT: mailbo
+Act: pour house in of, Rew 0, Score 0, Done False, Value -0.200
+Obs: There seems to be a noun missing in that sentence!
+TmplPred: west 0.006, south 0.006, hatch OBJ 0.005, climb 0.005, lift up OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: mailbo 0.002, lubric 0.002, up 0.002, bar 0.002, under 0.002 GT: mailbo
+Act: south, Rew 0, Score 0, Done False, Value -0.155
+Obs: South of House You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+TmplPred: south 0.006, climb 0.005, west 0.005, hatch OBJ 0.005, exit OBJ 0.005 GT: south, west, east
+ObjtPred: mailbo 0.002, up 0.002, lubric 0.002, bar 0.002, torch 0.002 GT: 
+Act: light house, Rew 0, Score 0, Done False, Value -0.171
+Obs: You don't have the white house.
+TmplPred: south 0.006, climb 0.005, hatch OBJ 0.005, exit OBJ 0.005, west 0.005 GT: south, west, east
+ObjtPred: up 0.002, mailbo 0.002, lubric 0.002, bar 0.002, under 0.002 GT: 
