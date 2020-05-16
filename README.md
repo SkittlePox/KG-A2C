@@ -1,5 +1,14 @@
 The original KG-A2C repository has been forked from u/rajammanabrolu
 
+get corenlp with:
+```
+curl -O -L http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
+unzip stanford-corenlp-full-2018-10-05.zip
+```
+
+snag the z5 directory from this repository and rename it `roms`
+https://github.com/AlexWillisson/zorky.git
+
 # KG-A2C
 Goal driven language generation using knowledge graph A2C agents. This code accompanies the paper [Graph Constrained Reinforcement Learning for Natural Language Action Spaces](https://openreview.net/forum?id=B1x6w0EtwH).
 
