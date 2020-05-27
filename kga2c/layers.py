@@ -24,7 +24,7 @@ class EncoderRNN(nn.Module):
         return output, hidden
 
     def initHidden(self, batch_size):
-        return torch.zeros(1, batch_size, self.hidden_size).cuda()
+        return torch.zeros(1, batch_size, self.hidden_size).to(device)#cuda()
 
 
 class PackedEncoderRNN(nn.Module):
@@ -40,7 +40,7 @@ class PackedEncoderRNN(nn.Module):
             hidden = self.initHidden(input.size(0))
 
         # Pack the padded batch of sequences
-        lengths = torch.tensor([torch.nonzero(n)[-1] + 1 for n in input], dtype=torch.long).cuda()#, device=device)
+        lengths = torch.tensor([torch.nonzero(n)[-1] + 1 for n in input], dtype=torch.long).to(device)#.to(device)#cuda()#, device=device)
 
         packed = nn.utils.rnn.pack_padded_sequence(embedded, lengths, enforce_sorted=False)
         output, hidden = self.gru(packed, hidden)
@@ -52,7 +52,7 @@ class PackedEncoderRNN(nn.Module):
         return output, hidden
 
     def initHidden(self, batch_size):
-        return torch.zeros(1, batch_size, self.hidden_size).cuda()
+        return torch.zeros(1, batch_size, self.hidden_size).to(device)#cuda()
 
 
 class DecoderRNN(nn.Module):
@@ -72,7 +72,7 @@ class DecoderRNN(nn.Module):
         return output, hidden
 
     def initHidden(self, batch):
-        return torch.zeros(1, batch, self.hidden_size).cuda()#).cuda()
+        return torch.zeros(1, batch, self.hidden_size).to(device)#cuda()#).to(device)#to(device)#cuda()
 
 
 class UnregDropout(nn.Module):
@@ -87,7 +87,7 @@ class UnregDropout(nn.Module):
     def forward(self, X):
         if self.training:
             binomial = torch.distributions.binomial.Binomial(probs=1-self.p)
-            sample = binomial.sample(X.size()).cuda()
+            sample = binomial.sample(X.size()).to(device)#to(device)#cuda()
             return X * sample
         return X
 
@@ -124,7 +124,7 @@ class DecoderRNN2(nn.Module):
         return output, ret_output, hidden
 
     def initHidden(self, device):
-        return torch.zeros(1, 1, self.hidden_size).cuda()
+        return torch.zeros(1, 1, self.hidden_size).to(device)#cuda()
 
 
 class AttnDecoderRNN(nn.Module):
@@ -161,7 +161,7 @@ class AttnDecoderRNN(nn.Module):
         return output, hidden, attn_weights
 
     def initHidden(self, device):
-        return torch.zeros(1, 1, self.hidden_size)#).cuda()
+        return torch.zeros(1, 1, self.hidden_size)#).to(device)#cuda()
 
 
 class GraphAttentionLayer(nn.Module):
@@ -237,7 +237,7 @@ class EncoderLSTM(nn.Module):
             batch_size,
             self.hidden_size
         ), requires_grad=False)
-        return h0.cuda(), c0.cuda()
+        return h0.to(device), c0.to(device)#cuda()
 
     def forward(self, inputs, lengths=0):
         embeds = self.embedding(inputs)   # (batch, seq_len, embedding_size)

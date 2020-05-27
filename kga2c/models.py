@@ -39,7 +39,7 @@ class ObjectDecoder(nn.Module):
     def forward(self, input, input_hidden, vocab, vocab_rev, decode_steps_t, graphs):
         all_outputs, all_words = [], []
 
-        decoder_input = torch.tensor([vocab_rev['<s>']] * input.size(0)).cuda()
+        decoder_input = torch.tensor([vocab_rev['<s>']] * input.size(0)).to(device)
         decoder_hidden = input_hidden.unsqueeze(0)
         torch.set_printoptions(profile="full")
 
@@ -56,7 +56,7 @@ class ObjectDecoder(nn.Module):
                     graph_list = graphs[i].nonzero().cpu().numpy().flatten().tolist()
                     assert len(graph_list) == dec_probs.numel()
                     dec_objs.append(graph_list[idx])
-                topi = torch.LongTensor(dec_objs).cuda()
+                topi = torch.LongTensor(dec_objs).to(device)
 
                 # dec_probs = self.softmax(decoder_output)
                 # topi = dec_probs.multinomial(num_samples=1)
@@ -76,7 +76,7 @@ class ObjectDecoder(nn.Module):
                     cur_obj = np.random.choice(topi[i].reshape(-1), p=topv[i].reshape(-1))
                     cur_objs.append(cur_obj)
 
-                decoder_input = torch.LongTensor(cur_objs).cuda()
+                decoder_input = torch.LongTensor(cur_objs).to(device)
                 all_words.append(decoder_input)
                 all_outputs.append(decoder_output)
 
@@ -142,7 +142,7 @@ class KGA2C(nn.Module):
     def forward(self, obs, scores, graph_rep, graphs):
         '''
         :param obs: The encoded ids for the textual observations (shape 4x300):
-        The 4 components of an observation are: look - ob_l, inventory - ob_i, response - ob_r, and prev_action. 
+        The 4 components of an observation are: look - ob_l, inventory - ob_i, response - ob_r, and prev_action.
         :type obs: ndarray
 
         '''
@@ -162,13 +162,13 @@ class KGA2C(nn.Module):
             cur_st.extend([int(c) for c in '{0:09b}'.format(abs(scr))])
             src_t.append(cur_st)
 
-        src_t = torch.FloatTensor(src_t).cuda()
+        src_t = torch.FloatTensor(src_t).to(device)
 
         if not self.gat:
-            state_emb = torch.cat((o_t, src_t), dim=1) 
+            state_emb = torch.cat((o_t, src_t), dim=1)
         else:
             g_t = self.state_gat.forward(graph_rep)
-            state_emb = torch.cat((g_t, o_t, src_t), dim=1)    
+            state_emb = torch.cat((g_t, o_t, src_t), dim=1)
         state_emb = F.relu(self.state_fc(state_emb))
         det_state_emb = state_emb.clone()#.detach()
         value = self.critic(det_state_emb)
@@ -188,9 +188,9 @@ class KGA2C(nn.Module):
             templ_enc_input.append(templ)
             decode_steps.append(decode_step)
 
-        decoder_o_input, decoder_o_hidden_init0, decoder_o_enc_oinpts = self.template_enc.forward(torch.tensor(templ_enc_input).cuda().clone())
+        decoder_o_input, decoder_o_hidden_init0, decoder_o_enc_oinpts = self.template_enc.forward(torch.tensor(templ_enc_input).to(device).clone())
 
-        decoder_o_output, decoded_o_words = self.decoder_object.forward(decoder_o_hidden_init0.cuda(), decoder_t_hidden.squeeze_(0).cuda(), self.vocab, self.vocab_rev, decode_steps, graphs)
+        decoder_o_output, decoded_o_words = self.decoder_object.forward(decoder_o_hidden_init0.to(device), decoder_t_hidden.squeeze_(0).to(device), self.vocab, self.vocab_rev, decode_steps, graphs)
 
         return decoder_t_output, decoder_o_output, decoded_o_words, topi, value, decode_steps#decoder_t_output#template_mask
 
@@ -236,7 +236,7 @@ class StateNetwork(nn.Module):
                         graph_node_ids.append(1)
                 else:
                     graph_node_ids.append(1)
-            graph_node_ids = torch.LongTensor(graph_node_ids).cuda()
+            graph_node_ids = torch.LongTensor(graph_node_ids).to(device)
             cur_embeds = self.pretrained_embeds(graph_node_ids)
 
             cur_embeds = cur_embeds.mean(dim=0)
@@ -255,7 +255,7 @@ class StateNetwork(nn.Module):
         out = []
         for g in graph_rep:
             node_feats, adj = g
-            adj = torch.IntTensor(adj).cuda()
+            adj = torch.IntTensor(adj).to(device)
             x = self.gat.forward(self.state_ent_emb.weight, adj).view(-1)
             out.append(x.unsqueeze_(0))
         out = torch.cat(out)
@@ -319,10 +319,10 @@ class ActionDrQA(nn.Module):
         :type obs: np.ndarray of shape (Batch_Size x 4 x 300)
 
         '''
-        x_l, h_l = self.enc_look(torch.LongTensor(obs[:,0,:]).cuda(), self.h_look)
-        x_i, h_i = self.enc_inv(torch.LongTensor(obs[:,1,:]).cuda(), self.h_inv)
-        x_o, h_o = self.enc_ob(torch.LongTensor(obs[:,2,:]).cuda(), self.h_ob)
-        x_p, h_p = self.enc_preva(torch.LongTensor(obs[:,3,:]).cuda(), self.h_preva)
+        x_l, h_l = self.enc_look(torch.LongTensor(obs[:,0,:]).to(device), self.h_look)
+        x_i, h_i = self.enc_inv(torch.LongTensor(obs[:,1,:]).to(device), self.h_inv)
+        x_o, h_o = self.enc_ob(torch.LongTensor(obs[:,2,:]).to(device), self.h_ob)
+        x_p, h_p = self.enc_preva(torch.LongTensor(obs[:,3,:]).to(device), self.h_preva)
 
         if self.recurrent:
             self.h_look = h_l

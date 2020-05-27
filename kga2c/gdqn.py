@@ -98,7 +98,7 @@ class KGA2CTrainer(object):
             for o in objl:
                 cur_objt[o] = 1
             object_mask_target.append([[cur_objt], [cur_objt]])
-        obj_target_tt = torch.FloatTensor(object_mask_target).squeeze().to(device)#.cuda()
+        obj_target_tt = torch.FloatTensor(object_mask_target).to(device).squeeze()#.cuda()
         return tmpl_target_tt, obj_target_tt
 
 
