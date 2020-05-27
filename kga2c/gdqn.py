@@ -22,6 +22,7 @@ from vec_env import *
 import logger
 
 
+torch.autograd.set_detect_anomaly(True)
 # device = torch.device("cuda")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
