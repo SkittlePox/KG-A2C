@@ -22,7 +22,8 @@ from vec_env import *
 import logger
 
 
-device = torch.device("cuda")
+# device = torch.device("cuda")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def configure_logger(log_dir):
@@ -88,7 +89,7 @@ class KGA2CTrainer(object):
                 obj_t.update(a.obj_ids)
             tmpl_target.append(cur_t)
             obj_targets.append(list(obj_t))
-        tmpl_target_tt = torch.FloatTensor(tmpl_target).cuda()
+        tmpl_target_tt = torch.FloatTensor(tmpl_target, device=device)#).cuda()
 
         # Note: Adjusted to use the objects in the admissible actions only
         object_mask_target = []
@@ -97,7 +98,7 @@ class KGA2CTrainer(object):
             for o in objl:
                 cur_objt[o] = 1
             object_mask_target.append([[cur_objt], [cur_objt]])
-        obj_target_tt = torch.FloatTensor(object_mask_target).squeeze().cuda()
+        obj_target_tt = torch.FloatTensor(object_mask_target, device=device).squeeze()#.cuda()
         return tmpl_target_tt, obj_target_tt
 
 
@@ -168,6 +169,11 @@ class KGA2CTrainer(object):
             admissible = [g.admissible_actions for g in graph_infos]
             objs = [g.objs for g in graph_infos]
             tmpl_gt_tt, obj_mask_gt_tt = self.generate_targets(admissible, objs)
+
+
+
+            ### TODO mods here
+
 
             # Log template/object predictions/ground_truth
             gt_tmpls = [self.template_generator.templates[i] for i in tmpl_gt_tt[0].nonzero().squeeze().cpu().numpy().flatten().tolist()]

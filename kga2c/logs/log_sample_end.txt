@@ -1,0 +1,50 @@
+Act: open white, Rew 0, Score 0, Done False, Value 0.046
+Obs: You're not at the house.
+TmplPred: west 0.447, north 0.161, south 0.134, open OBJ 0.123, east 0.075 GT: go around OBJ, north, south, east
+ObjtPred: mailbo 0.179, pile 0.016, trees 0.016, of 0.011, on 0.008 GT: trees
+Act: east, Rew 0, Score 0, Done False, Value 0.051
+Obs: Forest Path
+TmplPred: west 0.419, north 0.162, south 0.134, open OBJ 0.118, east 0.076 GT: go around OBJ, north, south, west, east, up
+ObjtPred: mailbo 0.175, pile 0.016, trees 0.016, of 0.011, on 0.008 GT: forest
+Act: west, Rew 0, Score 0, Done False, Value 0.045
+Obs: Forest
+TmplPred: west 0.396, north 0.154, south 0.135, open OBJ 0.116, east 0.088 GT: go around OBJ, north, south, east
+ObjtPred: mailbo 0.174, pile 0.016, trees 0.016, of 0.011, on 0.008 GT: trees
+Act: west, Rew 0, Score 0, Done False, Value 0.048
+Obs: You would need a machete to go further west.
+TmplPred: west 0.424, north 0.174, south 0.138, open OBJ 0.126, east 0.079 GT: go around OBJ, north, south, east
+ObjtPred: mailbo 0.175, pile 0.016, trees 0.016, of 0.011, on 0.008 GT: trees
+Act: north, Rew 0, Score 0, Done False, Value 0.047
+Obs: Clearing On the ground is a pile of leaves.
+Returns:  0.000, 0.000, 0.001, 0.001, 0.003, 0.005, 0.011, 0.022
+Advants:  -0.049, -0.047, -0.044, -0.045, -0.048, -0.039, -0.037, -0.026
+TmplPred: west 0.507, south 0.176, open OBJ 0.092, east 0.086, north 0.078 GT: take OBJ, pull OBJ, south, west, east
+ObjtPred: mailbo 0.215, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: pile
+Act: take up, Rew 0, Score 0, Done False, Value 0.050
+Obs: You are already standing, I think.
+TmplPred: west 0.520, south 0.157, open OBJ 0.099, east 0.089, north 0.088 GT: take OBJ, pull OBJ, south, west, east
+ObjtPred: mailbo 0.216, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: pile
+Act: south, Rew 0, Score 0, Done False, Value 0.057
+Obs: Forest Path
+TmplPred: west 0.513, south 0.149, open OBJ 0.095, east 0.091, north 0.089 GT: go around OBJ, north, south, west, east, up
+ObjtPred: mailbo 0.213, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: forest
+Act: south, Rew 0, Score 0, Done False, Value 0.055
+Obs: North of House
+TmplPred: west 0.448, south 0.138, open OBJ 0.097, east 0.093, north 0.092 GT: north, west, east
+ObjtPred: mailbo 0.213, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: 
+Act: west, Rew 0, Score 0, Done False, Value 0.059
+Obs: West of House There is a small mailbox here.
+TmplPred: west 0.563, south 0.150, open OBJ 0.100, north 0.088, east 0.073 GT: open OBJ, north, south, west
+ObjtPred: mailbo 0.219, pile 0.024, trees 0.017, of 0.015, in 0.009 GT: mailbo
+Act: north, Rew 0, Score 0, Done False, Value 0.070
+Obs: North of House
+TmplPred: west 0.467, south 0.150, open OBJ 0.096, east 0.094, north 0.089 GT: north, west, east
+ObjtPred: mailbo 0.211, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: 
+Act: south, Rew 0, Score 0, Done False, Value 0.053
+Obs: The windows are all boarded.
+TmplPred: west 0.523, south 0.151, open OBJ 0.095, north 0.090, east 0.087 GT: north, west, east
+ObjtPred: mailbo 0.216, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: 
+Act: north, Rew 0, Score 0, Done False, Value 0.054
+Obs: Forest Path
+TmplPred: west 0.503, south 0.160, open OBJ 0.093, east 0.090, north 0.083 GT: go around OBJ, north, south, west, east, up
+ObjtPred: mailbo 0.213, pile 0.023, trees 0.017, of 0.015, in 0.009 GT: forest
