@@ -3,6 +3,7 @@ roms/
 stanford-corenlp-full-2018-10-05/
 .DS_Store
 NOTES.md
+kga2c/logs/tb/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
