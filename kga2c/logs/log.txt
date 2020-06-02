@@ -1,352 +1,72 @@
 Logging to ./logs/
 Parameters {'output_dir': './logs/', 'spm_file': './spm_models/unigram_8k.model', 'tsv_file': '../data/zork1_entity2id.tsv', 'rom_file_path': 'roms/zork1.z5', 'openie_path': 'stanford-corenlp-full-2018-10-05', 'batch_size': 16, 'lr': 0.003, 'gamma': 0.5, 'embedding_size': 50, 'hidden_size': 100, 'padding_idx': 0, 'gat_emb_size': 50, 'dropout_ratio': 0.2, 'preload_weights': '', 'bindings': 'zork1', 'seed': 0, 'steps': 100000, 'reset_steps': 100, 'stuck_steps': 10, 'trial': 'base', 'loss': 'value_policy_entropy', 'graph_dropout': 0.0, 'k_object': 1, 'g_val': False, 'entropy_coeff': 0.03, 'clip': 40, 'bptt': 8, 'value_coeff': 9, 'template_coeff': 3, 'object_coeff': 9, 'recurrent': True, 'checkpoint_interval': 500, 'gat': True, 'masking': 'kg'}
-TmplPred: lock OBJ with OBJ 0.005, answer OBJ 0.005, blow up OBJ with OBJ 0.005, smell OBJ 0.005, east 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, body 0.002, exting 0.002, trail 0.002 GT: mailbo
-Act: cross of, Rew 0, Score 0, Done False, Value -0.053
-Obs: What do you want to cross?
-TmplPred: blow up OBJ with OBJ 0.005, throw OBJ on OBJ 0.005, climb 0.005, lower OBJ 0.005, exting OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, trail 0.002, exting 0.002, body 0.002 GT: mailbo
-Act: blow up white with front, Rew 0, Score 0, Done False, Value -0.072
-Obs: How can you inflate that?
-TmplPred: cut OBJ with OBJ 0.005, answer OBJ 0.005, east 0.005, smell OBJ 0.005, tie up OBJ with OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, trail 0.002, body 0.002, unscri 0.002 GT: mailbo
-Act: open boarde with of, Rew 0, Score 0, Done False, Value -0.082
+TmplPred: touch OBJ 0.005, play OBJ 0.005, ask OBJ 0.005, follow OBJ 0.005, put OBJ under OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: send 0.002, key 0.002, north 0.002, launch 0.002, shovel 0.002 GT: small
+Act: poke with with front, Rew 0, Score 0, Done False, Value -0.057
+Obs: That sentence isn't one I recognize.
+TmplPred: touch OBJ 0.005, ask OBJ 0.005, put OBJ under OBJ 0.005, pray 0.005, scream 0.005 GT: open OBJ, north, south, west
+ObjtPred: send 0.002, shovel 0.002, key 0.002, launch 0.002, north 0.002 GT: mailbo
+Act: is boarde in of, Rew 0, Score 0, Done False, Value -0.038
 Obs: There seems to be a noun missing in that sentence!
-TmplPred: lower OBJ 0.005, blow up OBJ with OBJ 0.005, east 0.005, drink from OBJ 0.005, throw OBJ on OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, body 0.002, trail 0.002, exting 0.002 GT: mailbo
-Act: east, Rew 0, Score 0, Done False, Value -0.062
-Obs: The door is boarded and you can't remove the boards.
-TmplPred: east 0.005, lock OBJ with OBJ 0.005, smell OBJ 0.005, blow up OBJ with OBJ 0.005, lower OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, exting 0.002, body 0.002, unscri 0.002 GT: mailbo
-Act: examin in all, Rew 0, Score 0, Done False, Value -0.060
-Obs: door: The door is closed. small mailbox: The small mailbox is closed.
-TmplPred: lower OBJ 0.005, swing OBJ 0.005, put OBJ in OBJ 0.005, dig OBJ with OBJ 0.005, tie up OBJ with OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, body 0.002, exting 0.002, trail 0.002 GT: mailbo
-Act: enter, Rew 0, Score 0, Done False, Value -0.065
-Obs: You can't go that way.
-TmplPred: lock OBJ with OBJ 0.005, east 0.005, wait 0.005, tie up OBJ with OBJ 0.005, smell OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, body 0.002, ramp 0.002, exting 0.002, trail 0.002 GT: mailbo
-Act: throw front in of, Rew 0, Score 0, Done False, Value -0.059
-Obs: There seems to be a noun missing in that sentence!
-TmplPred: east 0.005, lower OBJ 0.005, drink from OBJ 0.005, lock OBJ with OBJ 0.005, look for OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, ramp 0.002, body 0.002, exting 0.002, trail 0.002 GT: mailbo
-Act: burn down all with boarde, Rew 0, Score 0, Done False, Value -0.064
-Obs: You can't use multiple direct objects with "burn".
-Returns:  -0.000, -0.000, -0.001, -0.001, -0.003, -0.005, -0.011, -0.022
-Advants:  0.053, 0.072, 0.082, 0.061, 0.057, 0.059, 0.048, 0.043
-TmplPred: north 0.006, swing OBJ 0.005, blow out OBJ 0.005, answer OBJ 0.005, exting OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, dusty 0.002, bauble 0.002, trail 0.002 GT: mailbo
-Act: take in all, Rew 0, Score 0, Done False, Value 0.320
-Obs: You can't use multiple direct objects with "take".
-TmplPred: north 0.005, blow out OBJ 0.005, lower OBJ 0.005, swing OBJ 0.005, open OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, dusty 0.002, trail 0.002, bauble 0.002 GT: mailbo
-Act: break in with, Rew 0, Score 0, Done False, Value 0.295
-Obs: There seems to be a noun missing in that sentence!
-TmplPred: north 0.006, lower OBJ 0.005, blow out OBJ 0.005, east 0.005, open OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, bauble 0.002, dusty 0.002, trail 0.002 GT: mailbo
-Act: climb, Rew 0, Score 0, Done True, Value 0.366
-Obs: You can't go that way.
-Step 11 EpisodeScore 0
-
-TmplPred: look with OBJ 0.005, blow out OBJ 0.005, examin OBJ 0.005, open OBJ 0.005, north 0.005 GT: 
-ObjtPred: elvish 0.002, exting 0.002, bauble 0.002, dusty 0.002, emeral 0.002 GT: 
-Act: apply house to of, Rew 0, Score 0, Done False, Value 0.261
-Obs: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved. ZORK is a registered trademark of Infocom, Inc. Revision 88 / Serial number 840726  West of House You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
-TmplPred: north 0.006, exting OBJ 0.005, examin OBJ 0.005, open OBJ 0.005, blow out OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, bauble 0.002, dusty 0.002, pat 0.002 GT: mailbo
-Act: climb, Rew 0, Score 0, Done False, Value 0.414
-Obs: You can't go that way.
-TmplPred: north 0.005, open OBJ 0.005, blow out OBJ 0.005, examin OBJ 0.005, exting OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, bauble 0.002, pat 0.002, dusty 0.002 GT: mailbo
-Act: oil west with house, Rew 0, Score 0, Done False, Value 0.384
-Obs: You can't see any west here!
-TmplPred: north 0.006, open OBJ 0.005, blow out OBJ 0.005, lower OBJ 0.005, exting OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, bauble 0.002, dusty 0.002, trail 0.002 GT: mailbo
-Act: lift up white, Rew 0, Score 0, Done False, Value 0.389
-Obs: Playing in this way with the white house doesn't seem to work.
-TmplPred: north 0.005, answer OBJ 0.005, blow out OBJ 0.005, examin OBJ 0.005, open OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: elvish 0.002, exting 0.002, bauble 0.002, dusty 0.002, pat 0.002 GT: mailbo
-Act: knock on house, Rew 0, Score 0, Done False, Value 0.353
-Obs: Why knock on a white house?
-Returns:  0.000, 0.000, 0.000, 0.011, 0.022, 0.043, 0.086, 0.173
-Advants:  -0.320, -0.295, -0.366, -0.250, -0.392, -0.341, -0.303, -0.180
-TmplPred: north 0.006, blow out OBJ 0.006, open OBJ 0.006, lower OBJ 0.006, examin OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: mailbo
-Act: pull on all, Rew 0, Score 0, Done False, Value -0.018
-Obs: You can't use multiple direct objects with "pull".
-TmplPred: north 0.006, lower OBJ 0.006, swing OBJ 0.006, blow out OBJ 0.005, open OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: mailbo
-Act: spray west on front, Rew 0, Score 0, Done False, Value -0.019
-Obs: You can't see any west here!
-TmplPred: north 0.006, lower OBJ 0.006, blow out OBJ 0.006, open OBJ 0.006, swing OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: mailbo
-Act: drop front down white, Rew 0, Score 0, Done False, Value -0.016
-Obs: You don't have the door.
-TmplPred: north 0.006, swing OBJ 0.006, lower OBJ 0.005, open OBJ 0.005, answer OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: mailbo
-Act: swing door at house, Rew 0, Score 0, Done False, Value -0.022
-Obs: You don't have the door.
-TmplPred: north 0.006, open OBJ 0.006, lower OBJ 0.005, swing OBJ 0.005, examin OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: mailbo
-Act: read boarde, Rew 0, Score 0, Done False, Value 0.001
-Obs: How does one read a door?
-TmplPred: north 0.006, blow out OBJ 0.006, lower OBJ 0.005, open OBJ 0.005, swing OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: mailbo
-Act: pour of, Rew 0, Score 0, Done False, Value -0.001
-Obs: What do you want to pour?
-TmplPred: north 0.006, lower OBJ 0.006, blow out OBJ 0.006, open OBJ 0.005, exting OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, dusty 0.002 GT: mailbo
-Act: push front under door, Rew 0, Score 0, Done True, Value -0.001
-Obs: You can't do that.
-Step 23 EpisodeScore 0
-
-TmplPred: north 0.005, look with OBJ 0.005, examin OBJ 0.005, blow out OBJ 0.005, swing OBJ 0.005 GT: 
-ObjtPred: mailbo 0.002, elvish 0.002, front 0.002, emeral 0.002, bauble 0.002 GT: 
-Act: follow of, Rew 0, Score 0, Done False, Value -0.015
-Obs: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved. ZORK is a registered trademark of Infocom, Inc. Revision 88 / Serial number 840726  West of House You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
-Returns:  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.008
-Advants:  0.018, 0.019, 0.016, 0.022, -0.001, 0.001, 0.001, 0.023
-TmplPred: north 0.007, open OBJ 0.006, lower OBJ 0.006, west 0.006, swing OBJ 0.006 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, elvish 0.002, boarde 0.002 GT: mailbo
-Act: curse, Rew 0, Score 0, Done False, Value -0.031
-Obs: Such language in a high class establishment like this!
-TmplPred: north 0.007, open OBJ 0.006, blow out OBJ 0.006, lower OBJ 0.006, west 0.006 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, boarde 0.002, elvish 0.002 GT: mailbo
-Act: northwest, Rew 0, Score 0, Done False, Value -0.036
-Obs: You can't go that way.
-TmplPred: north 0.007, open OBJ 0.006, swing OBJ 0.006, lower OBJ 0.006, south 0.006 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, elvish 0.002, boarde 0.002 GT: mailbo
-Act: push of, Rew 0, Score 0, Done False, Value -0.050
-Obs: What do you want to push?
-TmplPred: north 0.007, lower OBJ 0.006, open OBJ 0.006, blow out OBJ 0.006, south 0.006 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, boarde 0.002, elvish 0.002 GT: mailbo
-Act: chant, Rew 0, Score 0, Done False, Value -0.043
-Obs: The incantation echoes back faintly, but nothing else happens.
-TmplPred: north 0.008, open OBJ 0.006, lower OBJ 0.006, south 0.006, west 0.006 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, elvish 0.002, boarde 0.002 GT: mailbo
-Act: northeast, Rew 0, Score 0, Done False, Value -0.044
+TmplPred: touch OBJ 0.005, ask OBJ 0.005, answer 0.005, follow 0.005, board OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: send 0.002, north 0.002, shovel 0.002, key 0.002, launch 0.002 GT: mailbo
+Act: northeast, Rew 0, Score 0, Done False, Value -0.038
 Obs: North of House You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
-TmplPred: north 0.008, open OBJ 0.007, lower OBJ 0.006, south 0.006, west 0.006 GT: north, west, east
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, elvish 0.002, boarde 0.002 GT: 
-Act: examin on boarde, Rew 0, Score 0, Done False, Value -0.040
-Obs: You can't look inside a boarded window.
-TmplPred: north 0.007, open OBJ 0.006, swing OBJ 0.006, west 0.006, lower OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, elvish 0.002, boarde 0.002 GT: 
-Act: pull on window, Rew 0, Score 0, Done False, Value -0.027
-Obs: You can't move the boarded window.
-TmplPred: north 0.007, open OBJ 0.006, lower OBJ 0.006, south 0.006, exting OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.003, front 0.002, white 0.002, elvish 0.002, boarde 0.002 GT: 
-Act: jump in to, Rew 0, Score 0, Done False, Value -0.028
-Obs: There seems to be a noun missing in that sentence!
-Returns:  -0.000, -0.000, -0.000, -0.001, -0.002, -0.003, -0.006, -0.012
-Advants:  0.031, 0.036, 0.050, 0.043, 0.042, 0.037, 0.021, 0.016
-TmplPred: north 0.009, open OBJ 0.007, west 0.007, south 0.006, lower OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.002, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: open exit with to, Rew 0, Score 0, Done False, Value 0.067
+TmplPred: touch OBJ 0.005, answer 0.005, play OBJ 0.005, ask OBJ 0.005, go on OBJ 0.005 GT: north, west, east
+ObjtPred: send 0.002, shovel 0.002, north 0.002, launch 0.002, key 0.002 GT: 
+Act: molest narrow, Rew 0, Score 0, Done False, Value -0.051
+Obs: What a (ahem!) strange idea.
+TmplPred: touch OBJ 0.005, play OBJ 0.005, ask OBJ 0.005, pray 0.005, throw OBJ at OBJ 0.005 GT: north, west, east
+ObjtPred: send 0.002, shovel 0.002, key 0.002, turn 0.002, north 0.002 GT: 
+Act: touch of, Rew 0, Score 0, Done False, Value -0.061
+Obs: What do you want to touch?
+TmplPred: touch OBJ 0.005, scream 0.005, follow 0.005, blow up OBJ with OBJ 0.005, drive away OBJ 0.005 GT: north, west, east
+ObjtPred: send 0.002, launch 0.002, shovel 0.002, north 0.002, key 0.002 GT: 
+Act: dig in door with north, Rew 0, Score 0, Done False, Value -0.031
+Obs: You used the word "north" in a way that I don't understand.
+TmplPred: touch OBJ 0.005, play OBJ 0.005, put OBJ under OBJ 0.005, follow 0.005, spray OBJ with OBJ 0.005 GT: north, west, east
+ObjtPred: send 0.002, key 0.002, shovel 0.002, turn 0.002, launch 0.002 GT: 
+Act: talk to north, Rew 0, Score 0, Done False, Value -0.060
+Obs: You used the word "north" in a way that I don't understand.
+TmplPred: touch OBJ 0.005, follow 0.005, play OBJ 0.005, put OBJ under OBJ 0.005, answer 0.005 GT: north, west, east
+ObjtPred: send 0.002, key 0.002, shovel 0.002, turn 0.002, north 0.002 GT: 
+Act: burn narrow with west, Rew 0, Score 0, Done False, Value -0.057
+Obs: You don't have that!
+Returns:  -0.000, -0.000, -0.001, -0.001, -0.003, -0.005, -0.010, -0.021
+Advants:  0.057, 0.038, 0.037, 0.050, 0.059, 0.025, 0.050, 0.036
+TmplPred: west 0.005, ask OBJ 0.005, board OBJ 0.005, open OBJ 0.005, east 0.005 GT: north, west, east
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, board 0.002, green 0.002 GT: 
+Act: read from white, Rew 0, Score 0, Done False, Value 0.144
+Obs: How does one read a white house?
+TmplPred: west 0.006, ask OBJ 0.005, play OBJ 0.005, east 0.005, wind OBJ 0.005 GT: north, west, east
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, own 0.002, green 0.002 GT: 
+Act: dig up with window, Rew 0, Score 0, Done False, Value 0.108
+Obs: That sentence isn't one I recognize.
+TmplPred: west 0.006, ask OBJ 0.005, east 0.005, wind OBJ 0.005, play OBJ 0.005 GT: north, west, east
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, green 0.002, board 0.002 GT: 
+Act: listen for exit, Rew 0, Score 0, Done False, Value 0.138
 Obs: You used the word "exit" in a way that I don't understand.
-TmplPred: north 0.010, open OBJ 0.007, west 0.007, south 0.007, lower OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.002, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: spin path, Rew 0, Score 0, Done False, Value 0.054
-Obs: You can't spin that!
-TmplPred: north 0.010, open OBJ 0.007, west 0.007, south 0.007, blow out OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.003, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: read from path, Rew 0, Score 0, Done False, Value 0.052
-Obs: How does one read a way?
-TmplPred: north 0.009, open OBJ 0.008, west 0.007, south 0.007, blow out OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.003, front 0.002, boarde 0.002, marble 0.002 GT: 
-Act: scream, Rew 0, Score 0, Done False, Value 0.057
-Obs: Aaaarrrrgggghhhh!
-TmplPred: north 0.010, open OBJ 0.008, west 0.007, south 0.007, blow out OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.002, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: lift all, Rew 0, Score 0, Done False, Value 0.059
-Obs: It's not clear what you're referring to.
-TmplPred: north 0.010, open OBJ 0.008, west 0.007, south 0.007, lower OBJ 0.007 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.002, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: put exit on white, Rew 0, Score 0, Done False, Value 0.058
-Obs: You used the word "exit" in a way that I don't understand.
-TmplPred: north 0.010, open OBJ 0.007, west 0.007, south 0.007, cut OBJ with OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.002, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: climb up of, Rew 0, Score 0, Done False, Value 0.053
-Obs: There seems to be a noun missing in that sentence!
-TmplPred: north 0.011, open OBJ 0.008, west 0.008, south 0.007, blow out OBJ 0.006 GT: north, west, east
-ObjtPred: mailbo 0.005, white 0.002, boarde 0.002, front 0.002, marble 0.002 GT: 
-Act: enter, Rew 0, Score 0, Done True, Value 0.051
-Obs: You can't go that way.
-Step 40 EpisodeScore 0
+TmplPred: west 0.006, ask OBJ 0.005, east 0.005, play OBJ 0.005, go on OBJ 0.005 GT: north, west, east
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, green 0.002, seawor 0.002 GT: 
+Act: enchan door, Rew 0, Score 0, Done False, Value 0.155
+Obs: You can't see any door here!
+TmplPred: west 0.005, ask OBJ 0.005, east 0.005, board OBJ 0.005, drive away OBJ 0.005 GT: north, west, east
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, green 0.002, own 0.002 GT: 
+Act: wish, Rew 0, Score 0, Done False, Value 0.118
+Obs: With luck, your wish will come true.
+TmplPred: west 0.005, ask OBJ 0.005, go on OBJ 0.005, east 0.005, drive away OBJ 0.005 GT: north, west, east
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, green 0.002, board 0.002 GT: 
+Act: pick of, Rew 0, Score 0, Done True, Value 0.157
+Obs: What do you want to pick?
+Step 14 EpisodeScore 0
 
-Returns:  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
-Advants:  -0.067, -0.054, -0.052, -0.057, -0.059, -0.058, -0.053, -0.051
-TmplPred: north 0.010, open OBJ 0.008, south 0.007, west 0.007, look with OBJ 0.006 GT: 
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: 
-Act: go away door, Rew 0, Score 0, Done False, Value -0.036
+TmplPred: blow up OBJ with OBJ 0.005, east 0.005, untie OBJ 0.005, pull up OBJ 0.005, touch OBJ 0.005 GT: 
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, own 0.002, green 0.002 GT: 
+Act: swim in narrow, Rew 0, Score 0, Done False, Value 0.092
 Obs: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved. ZORK is a registered trademark of Infocom, Inc. Revision 88 / Serial number 840726  West of House You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
-TmplPred: north 0.015, west 0.010, open OBJ 0.010, south 0.009, lower OBJ 0.007 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: push of house, Rew 0, Score 0, Done False, Value -0.045
-Obs: Pushing the white house doesn't seem to work.
-TmplPred: north 0.015, west 0.011, open OBJ 0.010, south 0.010, lower OBJ 0.007 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: go on of, Rew 0, Score 0, Done False, Value -0.039
-Obs: There seems to be a noun missing in that sentence!
-TmplPred: north 0.016, open OBJ 0.011, west 0.011, south 0.010, lower OBJ 0.007 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: push on of, Rew 0, Score 0, Done False, Value -0.041
-Obs: There seems to be a noun missing in that sentence!
-TmplPred: north 0.016, open OBJ 0.011, west 0.010, south 0.009, lower OBJ 0.007 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: lower of, Rew 0, Score 0, Done False, Value -0.041
-Obs: What do you want to lower?
-TmplPred: north 0.015, west 0.010, open OBJ 0.010, south 0.010, lower OBJ 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: pour white on of, Rew 0, Score 0, Done False, Value -0.028
-Obs: There seems to be a noun missing in that sentence!
-TmplPred: north 0.016, west 0.010, open OBJ 0.010, south 0.009, lower OBJ 0.007 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: go in front, Rew 0, Score 0, Done False, Value -0.040
-Obs: You should supply a direction!
-TmplPred: north 0.015, open OBJ 0.010, west 0.010, south 0.009, blow out OBJ 0.007 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.010, white 0.003, boarde 0.003, front 0.003, window 0.003 GT: mailbo
-Act: comman boarde, Rew 0, Score 0, Done False, Value -0.032
-Obs: You cannot talk to that!
-Returns:  -0.000, -0.000, -0.001, -0.001, -0.002, -0.005, -0.010, -0.020
-Advants:  0.036, 0.044, 0.039, 0.040, 0.038, 0.023, 0.030, 0.012
-TmplPred: north 0.025, west 0.016, open OBJ 0.015, south 0.013, east 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.024, white 0.005, boarde 0.004, window 0.003, front 0.003 GT: mailbo
-Act: exting with, Rew 0, Score 0, Done False, Value -0.048
-Obs: That sentence isn't one I recognize.
-TmplPred: north 0.025, west 0.016, open OBJ 0.014, south 0.013, cut OBJ with OBJ 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.024, white 0.005, boarde 0.004, window 0.003, front 0.003 GT: mailbo
-Act: put with in white, Rew 0, Score 0, Done False, Value -0.046
-Obs: That sentence isn't one I recognize.
-TmplPred: north 0.026, west 0.016, open OBJ 0.014, south 0.013, cut OBJ with OBJ 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.024, white 0.005, boarde 0.004, window 0.004, front 0.003 GT: mailbo
-Act: enter, Rew 0, Score 0, Done False, Value -0.046
-Obs: You can't go that way.
-TmplPred: north 0.026, west 0.017, open OBJ 0.015, south 0.014, east 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.024, white 0.005, boarde 0.004, window 0.004, front 0.003 GT: mailbo
-Act: southwest, Rew 0, Score 0, Done True, Value -0.048
-Obs: You can't go that way.
-Step 52 EpisodeScore 0
-
-TmplPred: north 0.013, open OBJ 0.010, west 0.010, south 0.009, east 0.007 GT: 
-ObjtPred: mailbo 0.023, white 0.005, boarde 0.004, window 0.003, front 0.003 GT: 
-Act: up, Rew 0, Score 0, Done False, Value -0.045
-Obs: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved. ZORK is a registered trademark of Infocom, Inc. Revision 88 / Serial number 840726  West of House You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
-TmplPred: north 0.027, west 0.017, open OBJ 0.016, south 0.014, lower OBJ 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.023, white 0.005, boarde 0.004, window 0.003, front 0.003 GT: mailbo
-Act: throw with in boarde, Rew 0, Score 0, Done False, Value -0.050
-Obs: That sentence isn't one I recognize.
-TmplPred: north 0.026, west 0.017, open OBJ 0.015, south 0.013, east 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.024, white 0.005, boarde 0.004, window 0.003, front 0.003 GT: mailbo
-Act: drop front down west, Rew 0, Score 0, Done False, Value -0.049
-Obs: You don't have the door.
-TmplPred: north 0.027, west 0.017, open OBJ 0.016, south 0.015, cut OBJ with OBJ 0.008 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.023, white 0.005, boarde 0.004, window 0.003, front 0.003 GT: mailbo
-Act: hop, Rew 0, Score 0, Done False, Value -0.039
-Obs: Very good. Now you can go to the second grade.
-Returns:  0.000, 0.000, 0.000, 0.000, -0.003, -0.006, -0.013, -0.026
-Advants:  0.048, 0.046, 0.046, 0.048, 0.041, 0.043, 0.037, 0.013
-TmplPred: north 0.051, west 0.031, open OBJ 0.023, south 0.023, east 0.010 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.062, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: clean boarde, Rew 0, Score 0, Done False, Value -0.028
-Obs: If you wish, but heaven only knows why.
-TmplPred: north 0.065, west 0.037, open OBJ 0.029, south 0.025, east 0.011 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.064, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: enter, Rew 0, Score 0, Done False, Value -0.026
-Obs: You can't go that way.
-TmplPred: north 0.062, west 0.035, open OBJ 0.029, south 0.025, east 0.011 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.062, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: throw boarde over white, Rew 0, Score 0, Done False, Value -0.027
-Obs: You don't have the door.
-TmplPred: north 0.063, west 0.036, open OBJ 0.027, south 0.025, east 0.011 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.065, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: tie west to house, Rew 0, Score 0, Done False, Value -0.018
-Obs: You can't see any west here!
-TmplPred: north 0.052, west 0.029, open OBJ 0.027, south 0.021, east 0.011 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.063, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: throw boarde on house, Rew 0, Score 0, Done False, Value -0.023
-Obs: You don't have the door.
-TmplPred: north 0.059, west 0.036, open OBJ 0.027, south 0.024, east 0.011 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.064, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: hello, Rew 0, Score 0, Done False, Value -0.013
-Obs: Nice weather we've been having lately.
-TmplPred: north 0.053, west 0.032, open OBJ 0.025, south 0.023, east 0.010 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.063, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: throw white on white, Rew 0, Score 0, Done False, Value -0.018
-Obs: You don't have the white house.
-TmplPred: north 0.065, west 0.036, open OBJ 0.028, south 0.025, east 0.011 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.065, white 0.007, boarde 0.006, window 0.005, leaves 0.004 GT: mailbo
-Act: unlock all with all, Rew 0, Score 0, Done True, Value -0.012
-Obs: You can't use multiple direct objects with "unlock".
-Step 64 EpisodeScore 0
-
-Returns:  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
-Advants:  0.028, 0.026, 0.027, 0.018, 0.023, 0.013, 0.018, 0.012
-TmplPred: north 0.020, open OBJ 0.013, south 0.012, west 0.012, east 0.009 GT: 
-ObjtPred: mailbo 0.162, white 0.010, boarde 0.007, leaves 0.006, window 0.006 GT: 
-Act: curse boarde, Rew 0, Score 0, Done False, Value 0.009
-Obs: Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved. ZORK is a registered trademark of Infocom, Inc. Revision 88 / Serial number 840726  West of House You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
-TmplPred: north 0.189, west 0.090, open OBJ 0.066, south 0.052, east 0.015 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.170, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: mailbo
-Act: put white under house, Rew 0, Score 0, Done False, Value 0.031
-Obs: You don't have the white house.
-TmplPred: north 0.165, west 0.089, open OBJ 0.059, south 0.047, east 0.016 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.169, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: mailbo
-Act: north, Rew 0, Score 0, Done False, Value 0.027
-Obs: North of House You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
-TmplPred: north 0.170, west 0.084, open OBJ 0.055, south 0.044, east 0.018 GT: north, west, east
-ObjtPred: mailbo 0.165, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: 
-Act: pick up path, Rew 0, Score 0, Done False, Value 0.012
-Obs: You must specify a direction to go.
-TmplPred: north 0.143, west 0.077, open OBJ 0.051, south 0.041, east 0.017 GT: north, west, east
-ObjtPred: mailbo 0.166, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: 
-Act: pull boarde, Rew 0, Score 0, Done False, Value 0.003
-Obs: You can't move the boarded window.
-TmplPred: north 0.171, west 0.081, open OBJ 0.056, south 0.043, east 0.017 GT: north, west, east
-ObjtPred: mailbo 0.167, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: 
-Act: open to, Rew 0, Score 0, Done False, Value 0.010
-Obs: That sentence isn't one I recognize.
-TmplPred: north 0.139, west 0.066, open OBJ 0.048, south 0.038, east 0.017 GT: north, west, east
-ObjtPred: mailbo 0.165, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: 
-Act: west, Rew 0, Score 0, Done False, Value 0.017
-Obs: West of House There is a small mailbox here.
-TmplPred: north 0.163, west 0.078, open OBJ 0.057, south 0.048, east 0.016 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.169, white 0.010, boarde 0.007, window 0.006, leaves 0.006 GT: mailbo
-Act: say, Rew 0, Score 0, Done False, Value 0.028
-Obs: Say what?
-Returns:  0.000, 0.000, 0.000, 0.000, 0.000, 0.001, 0.001, 0.002
-Advants:  -0.009, -0.031, -0.027, -0.012, -0.003, -0.009, -0.016, -0.026
-TmplPred: north 0.274, west 0.121, open OBJ 0.083, south 0.065, east 0.022 GT: open OBJ, north, south, west
-ObjtPred: mailbo 0.353, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: mailbo
-Act: north, Rew 0, Score 0, Done False, Value 0.020
-Obs: North of House
-TmplPred: north 0.247, west 0.109, open OBJ 0.073, south 0.052, east 0.024 GT: north, west, east
-ObjtPred: mailbo 0.349, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: 
-Act: north, Rew 0, Score 0, Done False, Value 0.018
-Obs: Forest Path This is a path winding through a dimly lit forest. The path heads north south here. One particularly large tree with some low branches stands at the edge of the path. You hear in the distance the chirping of a song bird.
-TmplPred: north 0.228, west 0.113, open OBJ 0.068, south 0.059, east 0.023 GT: go around OBJ, north, south, west, east, up
-ObjtPred: mailbo 0.355, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: forest
-Act: south, Rew 0, Score 0, Done False, Value 0.021
-Obs: North of House
-TmplPred: north 0.256, west 0.116, open OBJ 0.078, south 0.056, east 0.024 GT: north, west, east
-ObjtPred: mailbo 0.347, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: 
-Act: open of, Rew 0, Score 0, Done False, Value 0.024
-Obs: What do you want to open?
-TmplPred: north 0.312, west 0.140, open OBJ 0.089, south 0.069, east 0.021 GT: north, west, east
-ObjtPred: mailbo 0.352, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: 
-Act: open white, Rew 0, Score 0, Done False, Value 0.022
-Obs: I can't see how to get in from here.
-TmplPred: north 0.395, west 0.177, open OBJ 0.090, south 0.071, east 0.020 GT: north, west, east
-ObjtPred: mailbo 0.360, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: 
-Act: north, Rew 0, Score 0, Done False, Value 0.043
-Obs: Forest Path
-TmplPred: north 0.298, west 0.128, open OBJ 0.085, south 0.068, east 0.024 GT: go around OBJ, north, south, west, east, up
-ObjtPred: mailbo 0.351, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: forest
-Act: north, Rew 0, Score 0, Done False, Value 0.016
-Obs: Clearing You are in a clearing, with a forest surrounding you on all sides. A path leads south. On the ground is a pile of leaves.
-TmplPred: north 0.348, west 0.166, open OBJ 0.088, south 0.071, east 0.022 GT: take OBJ, pull OBJ, south, west, east
-ObjtPred: mailbo 0.361, white 0.011, leaves 0.008, window 0.007, boarde 0.007 GT: leaves
-Act: west, Rew 0, Score 0, Done False, Value 0.036
-Obs: Forest This is a forest, with trees in all directions. To the east, there appears to be sunlight.
-Returns:  0.000, 0.000, 0.001, 0.001, 0.002, 0.005, 0.010, 0.020
-Advants:  -0.020, -0.017, -0.021, -0.022, -0.020, -0.038, -0.006, -0.016
+TmplPred: ask OBJ 0.006, west 0.006, wind OBJ 0.005, drive away OBJ 0.005, play OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: mailbo 0.002, north 0.002, shovel 0.002, own 0.002, green 0.002 GT: mailbo
+Act: temple, Rew 0, Score 0, Done False, Value 0.135
+Obs: Nothing happens.
+Returns:  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.036, 0.071
+Advants:  -0.144, -0.108, -0.138, -0.155, -0.118, -0.157, -0.056, -0.064

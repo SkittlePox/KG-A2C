@@ -7,6 +7,7 @@ import time
 import datetime
 import tempfile
 from collections import defaultdict
+import torch
 
 DEBUG = 10
 INFO = 20
@@ -157,12 +158,29 @@ class TensorBoardOutputFormat(KVWriter):
         def summary_val(k, v):
             kwargs = {'tag': k, 'simple_value': float(v)}
             return self.tf.Summary.Value(**kwargs)
-        summary = self.tf.Summary(value=[summary_val(k, v) for k, v in kvs.items()])
-        event = self.event_pb2.Event(wall_time=time.time(), summary=summary)
-        event.step = self.step # is there any reason why you'd want to specify the step?
-        self.writer.WriteEvent(event)
-        self.writer.Flush()
-        self.step += 1
+
+        if torch.cuda.is_available():
+            summary = self.tf.Summary(value=[summary_val(k, v) for k, v in kvs.items()])
+            event = self.event_pb2.Event(wall_time=time.time(), summary=summary)
+            event.step = self.step # is there any reason why you'd want to specify the step?
+            self.writer.WriteEvent(event)
+            self.writer.Flush()
+            self.step += 1
+        else:
+            # for k, v in kvs.items():
+            #     print(f"{k}: {v}")
+            self.step += 1
+
+    # def writekvs(self, kvs):
+    #     def summary_val(k, v):
+    #         kwargs = {'tag': k, 'simple_value': float(v)}
+    #         return self.tf.Summary.Value(**kwargs)
+    #     summary = self.tf.Summary(value=[summary_val(k, v) for k, v in kvs.items()])
+    #     event = self.event_pb2.Event(wall_time=time.time(), summary=summary)
+    #     event.step = self.step # is there any reason why you'd want to specify the step?
+    #     self.writer.WriteEvent(event)
+    #     self.writer.Flush()
+    #     self.step += 1
 
     def close(self):
         if self.writer:
