@@ -37,10 +37,10 @@ def configure_logger(log_dir):
     log = logger.log
 
 
-class KGA2CTrainer(object):
+class KGOA2CTrainer(object):
     '''
 
-    KGA2C main class.
+    KGOA2C main class.
 
 
     '''
@@ -65,7 +65,7 @@ class KGA2CTrainer(object):
         # f.close()
         env = FrotzEnv(params['rom_file_path'])
         self.vocab_act, self.vocab_act_rev = load_vocab(env)
-        self.model = KGA2C(params, self.template_generator.templates, self.max_word_length,
+        self.model = KGOA2C(params, self.template_generator.templates, self.max_word_length,
                            self.vocab_act, self.vocab_act_rev, len(self.sp), gat=self.params['gat']).to(device)#.cuda()
         self.batch_size = params['batch_size']
         if params['preload_weights']:

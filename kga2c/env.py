@@ -15,6 +15,9 @@ def load_vocab(env):
     vocab[0] = ' '
     vocab[1] = '<s>'
     vocab_rev = {v: i for i, v in vocab.items()}
+    # f = open('info/vocab.txt', 'w')
+    # f.write(str(vocab))
+    # f.close()
     return vocab, vocab_rev
 
 def clean_obs(s):

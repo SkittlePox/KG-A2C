@@ -1,6 +1,26 @@
 Logging to ./logs/
 Parameters {'output_dir': './logs/', 'spm_file': './spm_models/unigram_8k.model', 'tsv_file': '../data/zork1_entity2id.tsv', 'rom_file_path': 'roms/zork1.z5', 'openie_path': 'stanford-corenlp-full-2018-10-05', 'batch_size': 16, 'lr': 0.003, 'gamma': 0.5, 'embedding_size': 50, 'hidden_size': 100, 'padding_idx': 0, 'gat_emb_size': 50, 'dropout_ratio': 0.2, 'preload_weights': '', 'bindings': 'zork1', 'seed': 0, 'steps': 100000, 'reset_steps': 100, 'stuck_steps': 10, 'trial': 'base', 'loss': 'value_policy_entropy', 'graph_dropout': 0.0, 'k_object': 1, 'g_val': False, 'entropy_coeff': 0.03, 'clip': 40, 'bptt': 8, 'value_coeff': 9, 'template_coeff': 3, 'object_coeff': 9, 'recurrent': True, 'checkpoint_interval': 500, 'gat': True, 'masking': 'kg'}
-TmplPred: cross OBJ 0.005, odysse 0.005, lift OBJ 0.005, break in OBJ 0.005, tie OBJ to OBJ 0.005 GT: open OBJ, north, south, west
-ObjtPred: chomp 0.002, mangle 0.002, force 0.002, gold 0.002, blessi 0.002 GT: mailbo
-Act: wind white, Rew 0, Score 0, Done False, Value 0.095
-Obs: You cannot wind up a white house.
+TmplPred: send for OBJ 0.005, break in OBJ 0.005, pick OBJ 0.005, untie OBJ from OBJ 0.005, wave OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: again 0.002, northw 0.002, yell 0.002, kiss 0.002, disemb 0.002 GT: small
+Act: blow up white with boarde, Rew 0, Score 0, Done False, Value 0.064
+Obs: How can you inflate that?
+TmplPred: examin in OBJ 0.005, untie OBJ from OBJ 0.005, take all 0.005, read from OBJ 0.005, up 0.005 GT: open OBJ, north, south, west
+ObjtPred: northw 0.002, again 0.002, yell 0.002, kiss 0.002, q 0.002 GT: mailbo
+Act: put boarde on door, Rew 0, Score 0, Done False, Value 0.088
+Obs: You don't have the door.
+TmplPred: southwest 0.005, send for OBJ 0.005, answer OBJ 0.005, read OBJ with OBJ 0.005, look under OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: northw 0.002, again 0.002, yell 0.002, kiss 0.002, disemb 0.002 GT: mailbo
+Act: untie west from house, Rew 0, Score 0, Done False, Value 0.082
+Obs: You can't see any west here!
+TmplPred: push OBJ to OBJ 0.005, enter 0.005, plug OBJ with OBJ 0.005, wave OBJ 0.005, examin in OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: again 0.002, yell 0.002, northw 0.002, kiss 0.002, disemb 0.002 GT: mailbo
+Act: activa of, Rew 0, Score 0, Done False, Value 0.060
+Obs: What do you want to activa?
+TmplPred: untie OBJ from OBJ 0.005, examin in OBJ 0.005, take all 0.005, put out OBJ 0.005, read from OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: northw 0.002, yell 0.002, again 0.002, kiss 0.002, disemb 0.002 GT: mailbo
+Act: fill boarde, Rew 0, Score 0, Done False, Value 0.069
+Obs: There is nothing to fill it with.
+TmplPred: southwest 0.005, pick OBJ 0.005, enter OBJ 0.005, examin in OBJ 0.005, answer OBJ 0.005 GT: open OBJ, north, south, west
+ObjtPred: again 0.002, northw 0.002, yell 0.002, kiss 0.002, disemb 0.002 GT: mailbo
+Act: clean white, Rew 0, Score 0, Done False, Value 0.076
+Obs: If you wish, but heaven only knows why.

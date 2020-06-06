@@ -223,6 +223,135 @@ class KGA2C(nn.Module):
     def reset_hidden(self, done_mask_tt):
         self.action_drqa.reset_hidden(done_mask_tt)
 
+class KGOA2C(nn.Module):
+    def __init__(self, params, templates, max_word_length, vocab_act,
+                 vocab_act_rev, input_vocab_size, gat=True):
+        super(KGOA2C, self).__init__()
+        self.templates = templates
+        self.gat = gat
+        self.max_word_length = max_word_length
+        self.vocab = vocab_act
+        self.vocab_rev = vocab_act_rev
+        self.batch_size = params['batch_size']
+        self.action_emb = nn.Embedding(len(vocab_act), params['embedding_size'])
+        self.state_emb = nn.Embedding(input_vocab_size, params['embedding_size'])
+        self.action_drqa = ActionDrQA(input_vocab_size, params['embedding_size'],
+                                      params['batch_size'], params['recurrent'])
+        self.state_gat = StateNetwork(params['gat_emb_size'],
+                                      vocab_act, params['embedding_size'],
+                                      params['dropout_ratio'], params['tsv_file'])
+        self.template_enc = EncoderLSTM(input_vocab_size, params['embedding_size'],
+                                        int(params['hidden_size'] / 2),
+                                        params['padding_idx'], params['dropout_ratio'],
+                                        self.action_emb)
+        if not self.gat:
+            self.state_fc = nn.Linear(110, 100)
+        else:
+            self.state_fc = nn.Linear(210, 100)
+        self.decoder_template = DecoderRNN(params['hidden_size'], len(templates))
+        self.decoder_object = ObjectDecoder(50, 100, len(self.vocab.keys()),
+                                            self.action_emb, params['graph_dropout'],
+                                            params['k_object'])
+        self.softmax = nn.Softmax(dim=1)
+        self.critic = nn.Linear(100, 1)
+
+    def get_action_rep(self, action):
+        action = str(action)
+        decode_step = action.count('OBJ')
+        action = action.replace('OBJ', '')
+        action_desc_num = 20 * [0]
+
+        for i, token in enumerate(action.split()[:20]):
+            short_tok = token[:self.max_word_length]
+            action_desc_num[i] = self.vocab_rev[short_tok] if short_tok in self.vocab_rev else 0
+
+        return action_desc_num, decode_step
+
+    def forward_next(self, obs, graph_rep):
+        o_t, h_t = self.action_drqa.forward(obs)
+        g_t = self.state_gat.forward(graph_rep)
+        state_emb = torch.cat((g_t, o_t), dim=1)
+        state_emb = F.relu(self.state_fc(state_emb))
+        value = self.critic(state_emb)
+        return value
+
+    def forward(self, obs, scores, graph_rep, graphs):
+        '''
+        :param obs: The encoded ids for the textual observations (shape 4x300):
+        The 4 components of an observation are: look - ob_l, inventory - ob_i, response - ob_r, and prev_action.
+        :type obs: ndarray
+
+        '''
+        batch = self.batch_size
+        #print('obs', obs)
+        #print('graphs', graphs)
+        o_t, h_t = self.action_drqa.forward(obs)
+
+        src_t = []
+
+        for scr in scores:
+            #fist bit encodes +/-
+            if scr >= 0:
+                cur_st = [0]
+            else:
+                cur_st = [1]
+            cur_st.extend([int(c) for c in '{0:09b}'.format(abs(scr))])
+            src_t.append(cur_st)
+
+        src_t = torch.FloatTensor(src_t).to(device)
+
+        if not self.gat:
+            state_emb = torch.cat((o_t, src_t), dim=1)
+        else:
+            g_t = self.state_gat.forward(graph_rep)
+            state_emb = torch.cat((g_t, o_t, src_t), dim=1)
+        state_emb = F.relu(self.state_fc(state_emb))
+        det_state_emb = state_emb.clone()#.detach()
+        value = self.critic(det_state_emb)
+
+        decoder_t_output, decoder_t_hidden = self.decoder_template(state_emb, h_t)#torch.zeros_like(h_t))
+
+        templ_enc_input = []
+        decode_steps = []
+        # print(decoder_t_output)
+        # print(len(decoder_t_output))
+        topi = self.softmax(decoder_t_output).multinomial(num_samples=1)
+        ## topi is the top templates, there's nothing to change here!
+        ## topi contains a 2d array of integers which correspond to the ids of words from vocab_act in gdqn
+        ## pass topi templates into some function that can return which frame slots they can accept
+        ## then pass these frame slots along to self.decoder_object about 15 lines down
+        # print(topi)
+        # print(len(topi))
+        #topi = decoder_t_output.topk(1)[1]#self.params['k'])
+
+        for i in range(batch):
+            #print(topi[i].squeeze().detach().item())
+            templ, decode_step = self.get_action_rep(self.templates[topi[i].squeeze().detach().item()])
+            # print(templ, decode_step)
+            templ_enc_input.append(templ)
+            decode_steps.append(decode_step)
+
+        decoder_o_input, decoder_o_hidden_init0, decoder_o_enc_oinpts = self.template_enc.forward(torch.tensor(templ_enc_input).to(device).clone())
+
+        decoder_o_output, decoded_o_words = self.decoder_object.forward(decoder_o_hidden_init0.to(device), decoder_t_hidden.squeeze_(0).to(device), self.vocab, self.vocab_rev, decode_steps, graphs)
+        ## need to pass frame slots into self.decoder_object call above, edit the class
+        ## decoded_o_words should not contain the frame-masked list of objects
+        ## Editing limited objects should be above this point, decoded_o_words is the actual chosen list of objects
+        # print(decoded_o_words)
+        # print(decoder_t_output)
+        # This returns the decoder template output and the decoder object output
+        return decoder_t_output, decoder_o_output, decoded_o_words, topi, value, decode_steps#decoder_t_output#template_mask
+
+
+    def clone_hidden(self):
+        self.action_drqa.clone_hidden()
+
+    def restore_hidden(self):
+        self.action_drqa.restore_hidden()
+
+    def reset_hidden(self, done_mask_tt):
+        self.action_drqa.reset_hidden(done_mask_tt)
+
 
 class StateNetwork(nn.Module):
     def __init__(self, gat_emb_size, vocab, embedding_size, dropout_ratio, tsv_file, embeddings=None):

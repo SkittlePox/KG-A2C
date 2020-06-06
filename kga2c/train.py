@@ -1,5 +1,6 @@
 import os
 from gdqn import KGA2CTrainer
+from ogdqn import KGOA2CTrainer
 import argparse
 
 
@@ -48,5 +49,6 @@ def parse_args():
 if __name__ == "__main__":
     params = parse_args()
     print(params)
-    trainer = KGA2CTrainer(params)
+    # trainer = KGA2CTrainer(params)
+    trainer = KGOA2CTrainer(params)
     trainer.train(params['steps'])
