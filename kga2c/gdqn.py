@@ -74,6 +74,8 @@ class KGA2CTrainer(object):
     def generate_targets(self, admissible, objs):
         '''
         Generates ground-truth targets for admissible actions.
+        This generates the tmpl_gt_tt, obj_mask_gt_tt
+        I think we need to modify the obj_mask_gt_tt calculation to include frames
 
         :param admissible: List-of-lists of admissible actions. Batch_size x Admissible
         :param objs: List-of-lists of interactive objects. Batch_size x Objs
@@ -91,8 +93,15 @@ class KGA2CTrainer(object):
             tmpl_target.append(cur_t)
             obj_targets.append(list(obj_t))
         tmpl_target_tt = torch.FloatTensor(tmpl_target).to(device)#.cuda()
+        # tmpl_target is a list of lists of templates [0] or [1]
+        # obj_targets is a list of lists of objects [120, 530, ...]
+        # print(self.template_generator.templates)
+        # The above must return templates that have frame slots and objects with their frame slots
 
+        # print(self.vocab_act) # This is a dictionary in the form {523: 'search'}
         # Note: Adjusted to use the objects in the admissible actions only
+        # filters out the objects that don't appear in the objs argument
+        # The below must filter objects that don't have frame slots that appear in the templates from above
         object_mask_target = []
         for objl in obj_targets: # in objs
             cur_objt = [0] * len(self.vocab_act)
@@ -101,6 +110,11 @@ class KGA2CTrainer(object):
             object_mask_target.append([[cur_objt], [cur_objt]])
         obj_target_tt = torch.FloatTensor(object_mask_target).to(device).squeeze()#.cuda()
         return tmpl_target_tt, obj_target_tt
+
+        # This function returns the templates and the objects, but they are slotted together later.
+        # I could A) not modify this at all except for mapping templates to frames, possibly returning templates without possible objects to slot
+        #         B) modify this selection to generate templates, then trim objects to only the ones that would fit into the templates
+        #        (C) Do B) and also trim templates that could not be used because they are missing matching object slots
 
 
     def generate_graph_mask(self, graph_infos):
@@ -159,9 +173,11 @@ class KGA2CTrainer(object):
             scores = [info['score'] for info in infos]
             tmpl_pred_tt, obj_pred_tt, dec_obj_tt, dec_tmpl_tt, value, dec_steps = self.model(
                 obs_reps, scores, graph_state_reps, graph_mask_tt)
+            ## All editing must happen before this
             tb.logkv_mean('Value', value.mean().item())
 
             # Log the predictions and ground truth values
+            # These are the list of template predictions
             topk_tmpl_probs, topk_tmpl_idxs = F.softmax(tmpl_pred_tt[0]).topk(5)
             topk_tmpls = [self.template_generator.templates[t] for t in topk_tmpl_idxs.tolist()]
             tmpl_pred_str = ', '.join(['{} {:.3f}'.format(tmpl, prob) for tmpl, prob in zip(topk_tmpls, topk_tmpl_probs.tolist())])
@@ -170,11 +186,6 @@ class KGA2CTrainer(object):
             admissible = [g.admissible_actions for g in graph_infos]
             objs = [g.objs for g in graph_infos]
             tmpl_gt_tt, obj_mask_gt_tt = self.generate_targets(admissible, objs)
-
-
-
-            ### TODO mods here
-
 
             # Log template/object predictions/ground_truth
             gt_tmpls = [self.template_generator.templates[i] for i in tmpl_gt_tt[0].nonzero().squeeze().cpu().numpy().flatten().tolist()]
@@ -187,6 +198,7 @@ class KGA2CTrainer(object):
             log('ObjtPred: {} GT: {}'.format(o1_pred_str, ', '.join(gt_objs))) # , ', '.join(graph_mask_str)))
 
             chosen_actions = self.decode_actions(dec_tmpl_tt, dec_obj_tt)
+            # print(f"chosen actions: {chosen_actions}")
 
             obs, rewards, dones, infos, graph_infos = self.vec_env.step(chosen_actions)
             tb.logkv_mean('TotalStepsPerEpisode', sum([i['steps'] for i in infos]) / float(len(graph_infos)))
@@ -205,6 +217,7 @@ class KGA2CTrainer(object):
             transitions.append((tmpl_pred_tt, obj_pred_tt, value, rew_tt,
                                 done_mask_tt, tmpl_gt_tt, dec_tmpl_tt,
                                 dec_obj_tt, obj_mask_gt_tt, graph_mask_tt, dec_steps))
+            # What is transitions? And why do we pass the tmpl_gt_tt, obj_mask_gt_tt variables into it?
 
             if len(transitions) >= self.params['bptt']:
                 tb.logkv('StepsPerSecond', float(step) / (time.time() - start))

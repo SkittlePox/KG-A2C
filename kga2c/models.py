@@ -31,12 +31,13 @@ class GAT(nn.Module):
 class ObjectDecoder(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, embeddings, graph_dropout, k):
         super(ObjectDecoder, self).__init__()
-        self.k = k
+        self.k = k  # Set to 1 by default
         self.decoder = DecoderRNN2(hidden_size, output_size, embeddings, graph_dropout)
         self.max_decode_steps = 2
         self.softmax = nn.Softmax(dim=1)
 
     def forward(self, input, input_hidden, vocab, vocab_rev, decode_steps_t, graphs):
+        ## This must also accept templates, frames
         all_outputs, all_words = [], []
 
         decoder_input = torch.tensor([vocab_rev['<s>']] * input.size(0)).to(device)
@@ -50,13 +51,20 @@ class ObjectDecoder(nn.Module):
                 all_outputs.append(ret_decoder_output)
 
                 dec_objs = []
+                # print(decoder_output.shape[0])
                 for i in range(decoder_output.shape[0]):
                     dec_probs = F.softmax(ret_decoder_output[i][graphs[i]], dim=0)
+                    ## dec_probs is a probability distribution of the objects, but these are unfiltered
+                    ## here you should mask out dec_probs based on the appropriate frames
+                    ## then you should re-softmax and let business continue as usual, you're done here!
                     idx = dec_probs.multinomial(1)
+                    # print(len(idx[0]))
                     graph_list = graphs[i].nonzero().cpu().numpy().flatten().tolist()
                     assert len(graph_list) == dec_probs.numel()
                     dec_objs.append(graph_list[idx])
                 topi = torch.LongTensor(dec_objs).to(device)
+                # this topi contains the objects, taken from dec_objs
+                # print(dec_objs)
 
                 # dec_probs = self.softmax(decoder_output)
                 # topi = dec_probs.multinomial(num_samples=1)
@@ -177,21 +185,32 @@ class KGA2C(nn.Module):
 
         templ_enc_input = []
         decode_steps = []
-
+        # print(decoder_t_output)
+        # print(len(decoder_t_output))
         topi = self.softmax(decoder_t_output).multinomial(num_samples=1)
+        ## topi is the top templates, there's nothing to change here!
+        ## pass topi templates into some function that can return which frame slots they can accept
+        ## then pass these frame slots along to self.decoder_object about 15 lines down
+        # print(topi)
+        # print(len(topi))
         #topi = decoder_t_output.topk(1)[1]#self.params['k'])
 
         for i in range(batch):
             #print(topi[i].squeeze().detach().item())
             templ, decode_step = self.get_action_rep(self.templates[topi[i].squeeze().detach().item()])
-            #print(templ, decode_step)
+            # print(templ, decode_step)
             templ_enc_input.append(templ)
             decode_steps.append(decode_step)
 
         decoder_o_input, decoder_o_hidden_init0, decoder_o_enc_oinpts = self.template_enc.forward(torch.tensor(templ_enc_input).to(device).clone())
 
         decoder_o_output, decoded_o_words = self.decoder_object.forward(decoder_o_hidden_init0.to(device), decoder_t_hidden.squeeze_(0).to(device), self.vocab, self.vocab_rev, decode_steps, graphs)
-
+        ## need to pass frame slots into self.decoder_object call above, edit the class
+        ## decoded_o_words should not contain the frame-masked list of objects
+        ## Editing limited objects should be above this point, decoded_o_words is the actual chosen list of objects
+        # print(decoded_o_words)
+        # print(decoder_t_output)
+        # This returns the decoder template output and the decoder object output
         return decoder_t_output, decoder_o_output, decoded_o_words, topi, value, decode_steps#decoder_t_output#template_mask
 
 
